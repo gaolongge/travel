@@ -1,0 +1,8 @@
+{
+  "project_type": "web",
+  "sub_project_type": "",
+  "name": "旅途笔记",
+  "app_slug": "travel-notes",
+  "version_description": "Fix tag filtering and article count display",
+  "preview_type": "pc"
+}

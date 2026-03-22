@@ -1,0 +1,17 @@
+[
+  {
+    "pageKey": "Home",
+    "title": "首页",
+    "url": "/"
+  },
+  {
+    "pageKey": "About",
+    "title": "关于",
+    "url": "/about"
+  },
+  {
+    "pageKey": "ArticleDetail",
+    "title": "文章详情",
+    "url": "/article/:id"
+  }
+]

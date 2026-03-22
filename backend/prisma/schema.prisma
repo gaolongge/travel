@@ -1,0 +1,67 @@
+// Prisma Schema for Application
+// PostgreSQL database with TypeScript ORM
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 文章表
+model Article {
+  id          String       @id @default(cuid())
+  title       String       // 标题
+  slug        String       @unique // URL友好标识
+  excerpt     String       @db.Text // 摘要
+  content     String       @db.Text // Markdown内容
+  coverImage  String       // 封面图片URL
+  readTime    Int          @default(5) // 阅读时长(分钟)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  authorId    String
+  author      Author       @relation(fields: [authorId], references: [id])
+  tags        ArticleTag[]
+  
+  @@index([createdAt])
+  @@index([slug])
+}
+
+// 标签表
+model Tag {
+  id           String        @id @default(cuid())
+  name         String        @unique
+  slug         String        @unique
+  color        String?       // 可选颜色
+  articles     ArticleTag[]
+  
+  @@index([slug])
+}
+
+// 文章-标签关联表
+model ArticleTag {
+  articleId String
+  tagId     String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  
+  @@id([articleId, tagId])
+  @@index([articleId])
+  @@index([tagId])
+}
+
+// 作者表
+model Author {
+  id        String    @id @default(cuid())
+  name      String    // 昵称
+  avatar    String    // 头像URL
+  bio       String    @db.Text // 个人简介
+  location  String?   // 所在地
+  weibo     String?    // 微博
+  wechat    String?    // 微信
+  instagram String?    // Instagram
+  email     String?    // 邮箱
+  articles  Article[]
+}
