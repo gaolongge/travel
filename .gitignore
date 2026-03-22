@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+
+# Environment files
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+
+# Cache
+.vite/
+
+# Codebuddy/Genie internal
+.codebuddy/
+.genie/
+
+# Design files
+docs/design/
+docs/posters/
+
+# Prisma migrations (keep folder structure)
+backend/prisma/migrations/*
+!backend/prisma/migrations/.gitkeep
